@@ -9,34 +9,43 @@
       margin: 0;
       padding: 0;
       height: 100%;
-      width: 100%;
       background: black;
       display: flex;
       justify-content: center;
       align-items: center;
+      flex-direction: column;
     }
-
     video {
-      width: 90vw;           /* ekranın %90’ı kadar genişlik */
-      max-width: 400px;      /* kare görünüm için maksimum genişlik */
-      aspect-ratio: 1 / 1;   /* kare oran */
-      object-fit: cover;     /* oranı korur */
-      background: black;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none; /* Başta görünmesin */
+    }
+    button {
+      padding: 1rem 2rem;
+      font-size: 1.5rem;
+      cursor: pointer;
+      border: none;
+      background: #ff4747;
+      color: white;
+      border-radius: 10px;
     }
   </style>
 </head>
 <body>
-  <video id="myVideo" autoplay muted playsinline>
+  <button id="playButton">▶ REKLAMI İZLEMEK İÇİN HEMEN TIKLA</button>
+  <video id="myVideo" controls>
     <source src="video.mp4" type="video/mp4">
     Tarayıcınız video etiketini desteklemiyor.
   </video>
 
   <script>
+    const btn = document.getElementById('playButton');
     const video = document.getElementById('myVideo');
 
-    // Kullanıcı ekrana dokunduğunda ses aç
-    document.body.addEventListener('click', () => {
-      video.muted = false;
+    btn.addEventListener('click', () => {
+      btn.style.display = 'none';
+      video.style.display = 'block';
       video.play();
     });
   </script>
