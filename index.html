@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Video Sitesi</title>
+  <title>gotkedileri.com</title>
+  <link rel="icon" type="image/png" href="https://cdn.shopify.com/s/files/1/2621/9594/files/Depositphotos_123231568_S_480x480.jpg?v=1654108645">
   <style>
     html, body {
       margin: 0;
@@ -21,15 +22,60 @@
       object-fit: cover;
       display: none; /* Başta görünmesin */
     }
+/* Yanıp sönme animasyonu aynı kalabilir */
+@keyframes flashy-blink {
+  0%, 100% {
+    background-color: #ff0000; /* Parlak Kırmızı */
+    box-shadow: 0 0 15px #ff0000, 0 0 30px #ff0000;
+  }
+  50% {
+    background-color: #ffff00; /* Parlak Sarı */
+    box-shadow: 0 0 20px #ffff00, 0 0 40px #ffff00;
+  }
+}
+
+button {
+  /* Temel Stiller */
+  padding: 1.5rem 2.5rem; /* Biraz daha esnek padding */
+  font-size: 1.8rem; /* Mobil ekranlarda çok büyük olmaması için biraz küçüldü */
+  font-weight: bold;
+  cursor: pointer;
+  border: 5px solid #00ff00;
+  color: black;
+  border-radius: 5px;
+  text-transform: uppercase;
+  transition: all 0.1s ease-in-out;
+  display: block; /* Sayfanın tamamını kaplaması için (Mobil reklam butonu hissi) */
+  width: 90%; /* Ekranın %90'ını kapla */
+  margin: 10px auto; /* Ortalamak için */
+  
+  /* Yanıp sönme animasyonu */
+  animation: flashy-blink 0.5s infinite alternate; 
+}
+
+/* 768px'ten büyük (tablet ve üzeri) ekranlar için boyutu tekrar büyütelim */
+@media (min-width: 768px) {
     button {
-      padding: 1rem 2rem;
-      font-size: 1.5rem;
-      cursor: pointer;
-      border: none;
-      background: #ff4747;
-      color: white;
-      border-radius: 10px;
+        font-size: 2.5rem; /* Büyük ekranlarda daha da büyük olsun */
+        width: auto; /* Kendi içeriği kadar genişlesin */
+        display: inline-block;
+        padding: 1.5rem 3rem;
     }
+}
+
+/* Dokunmatik cihazlarda ve masaüstünde hover (fare ile üzerine gelme) efekti */
+button:hover {
+  transform: scale(1.05); 
+  border-color: #ff00ff; 
+  box-shadow: 0 0 50px #ff00ff; 
+  animation: none; 
+}
+
+/* Mobil cihazlarda :active (dokunma) efekti, masaüstündeki :active ile aynıdır */
+button:active {
+  transform: scale(0.95);
+  background-color: #ff9900; 
+}
   </style>
 </head>
 <body>
@@ -51,3 +97,4 @@
   </script>
 </body>
 </html>
+
