@@ -1,102 +1,137 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>gotkedileri.com</title>
-  <link rel="icon" type="image/png" href="Untitled-1.png">
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      background: black;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-    }
-    video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: none; /* Başta görünmesin */
-    }
-/* Yanıp sönme animasyonu aynı kalabilir */
-@keyframes flashy-blink {
-  0%, 100% {
-    background-color: #ff0000; /* Parlak Kırmızı */
-    box-shadow: 0 0 15px #ff0000, 0 0 30px #ff0000;
-  }
-  50% {
-    background-color: #ffff00; /* Parlak Sarı */
-    box-shadow: 0 0 20px #ffff00, 0 0 40px #ffff00;
-  }
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>gotkedileri.com</title>
+    <link rel="icon" type="image/png" href="Untitled-1.png">
+    <style>
+        /* Genel Sayfa Stilleri */
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
 
-button {
-  /* Temel Stiller */
-  padding: 1.5rem 2.5rem; /* Biraz daha esnek padding */
-  font-size: 1.8rem; /* Mobil ekranlarda çok büyük olmaması için biraz küçüldü */
-  font-weight: bold;
-  cursor: pointer;
-  border: 5px solid #00ff00;
-  color: black;
-  border-radius: 5px;
-  text-transform: uppercase;
-  transition: all 0.1s ease-in-out;
-  display: block; /* Sayfanın tamamını kaplaması için (Mobil reklam butonu hissi) */
-  width: 90%; /* Ekranın %90'ını kapla */
-  margin: 10px auto; /* Ortalamak için */
-  
-  /* Yanıp sönme animasyonu */
-  animation: flashy-blink 0.5s infinite alternate; 
-}
+        /* Video Stilleri */
+        video {
+            /* Video, buton kaybolduktan sonra görünür olacak */
+            width: 100%;
+            height: 100vh; /* Tam ekran yüksekliği */
+            object-fit: contain; /* Görüntü bozulmasın diye contain kullandık */
+            display: none; /* Başta görünmesin */
+        }
 
-/* 768px'ten büyük (tablet ve üzeri) ekranlar için boyutu tekrar büyütelim */
-@media (min-width: 768px) {
-    button {
-        font-size: 2.5rem; /* Büyük ekranlarda daha da büyük olsun */
-        width: auto; /* Kendi içeriği kadar genişlesin */
-        display: inline-block;
-        padding: 1.5rem 3rem;
-    }
-}
+        /* Gökkuşağı Renklerini Oluşturan Animasyon */
+        @keyframes rainbow-flash {
+            0% {
+                background: linear-gradient(90deg, #ff0000, #ff7f00); /* Kırmızıdan Turuncuya */
+                box-shadow: 0 0 15px #ff0000, 0 0 30px #ff0000;
+            }
+            25% {
+                background: linear-gradient(90deg, #ff7f00, #ffff00); /* Turuncudan Sarıya */
+                box-shadow: 0 0 15px #ff7f00, 0 0 30px #ff7f00;
+            }
+            50% {
+                background: linear-gradient(90deg, #ffff00, #00ff00); /* Sarıdan Yeşile */
+                box-shadow: 0 0 15px #ffff00, 0 0 30px #ffff00;
+            }
+            75% {
+                background: linear-gradient(90deg, #00ff00, #0000ff); /* Yeşilden Maviye */
+                box-shadow: 0 0 15px #00ff00, 0 0 30px #00ff00;
+            }
+            100% {
+                background: linear-gradient(90deg, #0000ff, #9400d3); /* Maviden Mora */
+                box-shadow: 0 0 15px #0000ff, 0 0 30px #0000ff;
+            }
+        }
 
-/* Dokunmatik cihazlarda ve masaüstünde hover (fare ile üzerine gelme) efekti */
-button:hover {
-  transform: scale(1.05); 
-  border-color: #ff00ff; 
-  box-shadow: 0 0 50px #ff00ff; 
-  animation: none; 
-}
+        /* Mobil Uyumluluk İçin Sarmalayıcı Stilini Koruyoruz (Kullanılmasa da iyi bir alışkanlık) */
+        .flashy-button-link {
+            text-decoration: none;
+            display: block;
+            margin: 10px auto;
+            width: 90%;
+        }
+        
+        /* BUTONUN TÜM TEMEL VE MOBİL STİLLERİ */
+        button {
+            padding: 1.5rem 2.5rem;
+            font-size: 1.8rem;
+            font-weight: bold;
+            cursor: pointer;
+            border: 5px solid white; 
+            color: black;
+            border-radius: 5px;
+            text-transform: uppercase;
+            transition: all 0.1s ease-in-out;
+            
+            /* Mobil için varsayılan genişlik ve ortalama */
+            display: block;
+            width: 90%;
+            margin: 10px auto;
+            
+            /* Gökkuşağı Animasyonu */
+            animation: rainbow-flash 2s infinite alternate; 
+            background-size: 200% 100%; 
+        }
 
-/* Mobil cihazlarda :active (dokunma) efekti, masaüstündeki :active ile aynıdır */
-button:active {
-  transform: scale(0.95);
-  background-color: #ff9900; 
-}
-  </style>
+        /* TABLET VE MASAÜSTÜ İYİLEŞTİRMELERİ (TEK BLOKTA BİRLEŞTİRİLDİ) */
+        @media (min-width: 768px) {
+            .flashy-button-link {
+                width: auto;
+                display: inline-block;
+            }
+            button {
+                font-size: 2.5rem; 
+                width: auto; 
+                display: inline-block;
+                padding: 1.5rem 3rem;
+            }
+        }
+
+        /* HOVER VE ACTIVE STİLLERİ (TEK BLOKTA BİRLEŞTİRİLDİ) */
+        button:hover {
+            transform: scale(1.05); 
+            border-color: #ff00ff; 
+            box-shadow: 0 0 50px #ff00ff; 
+            animation: none; /* Hover'da animasyon durur */
+        }
+        
+        button:active {
+            transform: scale(0.95);
+            background-color: #ff9900; 
+        }
+    </style>
 </head>
 <body>
-  <button id="playButton">▶ REKLAMI İZLEMEK İÇİN HEMEN TIKLA</button>
-  <video id="myVideo" controls>
-    <source src="video.mp4" type="video/mp4">
-    Tarayıcınız video etiketini desteklemiyor.
-  </video>
+    
+    <button id="playButton">▶ REKLAMI İZLEMEK İÇİN HEMEN TIKLA</button>
+    <video id="myVideo" controls>
+        <source src="video.mp4" type="video/mp4">
+        Tarayıcınız video etiketini desteklemiyor.
+    </video>
 
-  <script>
-    const btn = document.getElementById('playButton');
-    const video = document.getElementById('myVideo');
+    <script>
+        const btn = document.getElementById('playButton');
+        const video = document.getElementById('myVideo');
 
-    btn.addEventListener('click', () => {
-      btn.style.display = 'none';
-      video.style.display = 'block';
-      video.play();
-    });
-  </script>
+        btn.addEventListener('click', () => {
+            btn.style.display = 'none';
+            
+            // Video görünür olurken, body'nin merkezleme stilini kaldıralım ki video tam ekrana yayılabilsin
+            document.body.style.display = 'block'; 
+            document.body.style.justifyContent = 'initial';
+            document.body.style.alignItems = 'initial';
+            
+            video.style.display = 'block';
+            video.play();
+        });
+    </script>
 </body>
 </html>
-
-
-
